@@ -1,0 +1,62 @@
+{
+  "kind": "collectionType",
+  "collectionName": "bts",
+  "info": {
+    "singularName": "btsapi",
+    "pluralName": "bts",
+    "displayName": "bts",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name_id": {
+      "type": "string",
+      "required": true,
+      "unique": true
+    },
+    "address": {
+      "type": "string"
+    },
+    "lat": {
+      "type": "float"
+    },
+    "lng": {
+      "type": "float"
+    },
+    "users_user": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "plugin::users-permissions.user",
+      "inversedBy": "bts"
+    },
+    "state": {
+      "type": "enumeration",
+      "enum": [
+        "normal",
+        "alarm"
+      ]
+    },
+    "status": {
+      "type": "enumeration",
+      "enum": [
+        "connected",
+        "disconnected"
+      ]
+    },
+    "province": {
+      "type": "string"
+    },
+    "province_id": {
+      "type": "integer"
+    },
+    "devices": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::device.device",
+      "mappedBy": "bts"
+    }
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "kind": "collectionType",
+  "collectionName": "device_profiles",
+  "info": {
+    "singularName": "device-profile",
+    "pluralName": "device-profiles",
+    "displayName": "device_profile"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string"
+    },
+    "model": {
+      "type": "string"
+    },
+    "brand": {
+      "type": "string"
+    },
+    "type": {
+      "type": "enumeration",
+      "enum": [
+        "solar_inv",
+        "controller",
+        "power_meter_3p",
+        "power_meter_1p"
+      ]
+    }
+  }
+}

@@ -1,0 +1,53 @@
+{
+  "kind": "collectionType",
+  "collectionName": "devices",
+  "info": {
+    "singularName": "device",
+    "pluralName": "devices",
+    "displayName": "device",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "model": {
+      "type": "string"
+    },
+    "brand": {
+      "type": "string"
+    },
+    "type": {
+      "type": "enumeration",
+      "enum": [
+        "solar_inv",
+        "controller",
+        "power_meter_3p",
+        "power_meter_1p"
+      ]
+    },
+    "name": {
+      "type": "string"
+    },
+    "protocol": {
+      "type": "enumeration",
+      "enum": [
+        "modbus_tcp",
+        "modbus_rtu"
+      ]
+    },
+    "serial": {
+      "type": "string"
+    },
+    "profile_id": {
+      "type": "integer"
+    },
+    "bts": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::btsapi.btsapi",
+      "inversedBy": "devices"
+    }
+  }
+}
