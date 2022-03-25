@@ -86,6 +86,17 @@ const router = new VueRouter({
           component: () => import('@/views/admin/History')
         },
         {
+          path: '/history/:id',
+          name: 'history',
+          meta: {
+            title: 'Lịch sử BTS',
+            icon: '',
+            hidden: true
+          },
+          type: 'all',
+          component: () => import('@/views/admin/HistoryBts')
+        },
+        {
           path: '/report',
           name: 'report',
           meta: {

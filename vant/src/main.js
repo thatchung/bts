@@ -10,6 +10,7 @@ import ProLayout, { PageHeaderWrapper } from '@ant-design-vue/pro-layout'
 import themePluginConfig from '../config/themePluginConfig'
 import * as VueGoogleMaps from 'vue2-google-maps'
 import { Form, FormModel, DatePicker } from 'ant-design-vue'
+import JsonExcel from 'vue-json-excel'
 
 import './core/lazy_use' // use lazy load components
 import './utils/filter' // global filter
@@ -22,7 +23,7 @@ Vue.config.productionTip = false
 Vue.component('pro-layout', ProLayout)
 Vue.component('page-container', PageHeaderWrapper)
 Vue.component('page-header-wrapper', PageHeaderWrapper)
-
+Vue.component('downloadExcel', JsonExcel)
 Vue.use(FormModel)
 Vue.use(Form)
 Vue.use(DatePicker)

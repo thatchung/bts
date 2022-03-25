@@ -29,7 +29,7 @@
         <a-col :span="9" class="r-data">
           <GmapMap
             :center="{ lat:bts.lat, lng:bts.lng }"
-            :zoom="11"
+            :zoom="14"
             map-type-id="terrain"
             style="width: 100%; height: 250px"
           >
@@ -269,6 +269,7 @@ export default {
     },
     loadData (params = {}) {
       this.loading = true
+      params['filters[bts]'] = this.$route.params.id
       getDeviceList({ ...params }).then(res => {
         if (!res) {
           this.$message.warning('Load danh sách không thành công')

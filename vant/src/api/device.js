@@ -4,6 +4,10 @@ export const getDeviceList = (data) => {
   return get('api/devices', data)
 }
 
+export const getDeviceLog = (data) => {
+  return get('api/devices-log', data)
+}
+
 export const addDevice = (data) => {
   return post('api/devices', data)
 }

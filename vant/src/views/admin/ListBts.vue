@@ -19,7 +19,7 @@
           :allowClear="true"
           :not-found-content="null"
           @search="handleSearchProvince"
-          @change="(ex) => onSearchProvince(ex)"
+          @change="(ex) => onChangeProvince(ex)"
           @deselect="(ex) => deSelectChangeSearch()"
         >
           <a-select-option v-for="p in list_province" :key="p.id" :value="p.id">
@@ -272,7 +272,7 @@ export default {
         this.list_users = res || []
       })
     },
-    onSearchProvince (value) {
+    onChangeProvince (value) {
       if (value) {
         this.filter.province_id = value
         this.onSearch()
