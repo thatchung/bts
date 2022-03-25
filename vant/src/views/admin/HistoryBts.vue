@@ -40,14 +40,14 @@ export default {
       filter: {
         create_date: null
       },
-      colors: ['#1890ff', '#227b64', '#3f4082', '#b00000', '#b18c67', '#ac1ea1', '#ff8900', '#29221c', '#68cd86', '#810663'],
+      colors: ['#1890ff', '#227b64', '#3f4082', '#b00000', '#b18c67', '#ac1ea1', '#ff8900', '#29221c', '#68cd86', '#810663', '#ffff08', '#093544'],
       chartdata: {
-        labels: ['1', '2', '3', '4', '5', '6', '7'],
+        labels: ['1', '2', '3', '4', '5'],
         datasets: [
           {
             label: 'Device 1',
             backgroundColor: '#1890ff',
-            data: [40, 20, 1, 22, 12, 12, 40]
+            data: [1, 1, 1, 1, 1]
           }
         ]
       },
@@ -111,16 +111,21 @@ export default {
         if (!res) {
           return false
         }
-        this.dataBts = res.data
-        this.listDevice = res.data.length > 0 ? res.data[0].data.device.map((o, i) => { return { name: o.sNo, id: i } }) : []
-        let labels = res.data.map(o => { return moment(o.time).format('HH:mm:ss DD/MM/YYYY') })
-        // let data = res.data.map(o => { return o.data.device[0].AC_E })
+        this.dataBts = res.data.reverse()
+        this.listDevice = res.data.length > 0 ? res.data[0].data.device.map((o, i) => {
+          let rs = { name: o.sNo, id: i }
+          if (o.type === 'solar_inv') {
+            rs = { name: o.ip, id: i }
+          }
+          return rs
+        }) : []
+        let labels = this.dataBts.map(o => { return moment(o.time).format('HH:mm:ss DD/MM/YYYY') })
         let datasets = []
         for (let i = 0; i < this.listDevice.length; i++) {
           let item = {
             label: this.listDevice[i].name,
               backgroundColor: this.colors[i],
-              data: res.data.map(o => { return o.data.device[i].AC_E })
+              data: this.dataBts.map(o => { return o.data.device[i].AC_E })
           }
           datasets.push(item)
         }

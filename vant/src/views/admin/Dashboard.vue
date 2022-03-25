@@ -21,10 +21,10 @@
       </div>
     </div>
     <div class="statistic-panel">
-        <a-statistic title="Tổng trạm" :value="statistic.total_bts" />
-        <a-statistic title="Trạm đang hoạt động" :value="statistic.total_action" />
-        <a-statistic title="Trạm mất kết nói" :value="statistic.total_disconection" />
-      </div>
+      <a-statistic title="Tổng trạm" :value="statistic.total_bts" />
+      <a-statistic title="Trạm đang hoạt động" :value="statistic.total_action" />
+      <a-statistic title="Trạm mất kết nói" :value="statistic.total_disconection" />
+    </div>
     <div class="map-container">
       <GmapMap
         :center="center"

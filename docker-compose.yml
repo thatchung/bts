@@ -12,3 +12,17 @@ services:
       MYSQL_DATABASE: strapi
       MYSQL_USER: strapi
       MYSQL_PASSWORD: strapi
+  str.api:
+    container_name: str.api
+    image: str.api
+    build: .
+    ports:
+      - "1347:1347"
+    volumes:
+      - ./uploads:/app/node/public/uploads
+  vant:
+    container_name: vant
+    image: vant
+    build: .
+    ports:
+      - "8002:80"
