@@ -1,0 +1,10 @@
+version: '3'
+services:
+  str.api:
+    container_name: str.api
+    image: str.api
+    build: .
+    ports:
+      - "1347:1347"
+    volumes:
+      - ./uploads:/app/node/public/uploads

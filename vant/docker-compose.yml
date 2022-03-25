@@ -1,0 +1,8 @@
+version: '3'
+services:
+  vant:
+    container_name: vant
+    image: vant
+    build: .
+    ports:
+      - "8002:80"
