@@ -8,3 +8,5 @@ services:
       - "1347:1347"
     volumes:
       - ./uploads:/app/node/public/uploads
+    network_mode: localnetw
+
