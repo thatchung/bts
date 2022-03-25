@@ -1,2 +1,3 @@
-read.txt
-
+docker build --target strapi -t str.api .
+docker build --target vant -t vant .
+docker-compose up
