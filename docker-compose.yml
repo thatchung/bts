@@ -12,3 +12,4 @@ services:
       MYSQL_DATABASE: strapi
       MYSQL_USER: strapi
       MYSQL_PASSWORD: strapi
+    network_mode: localnetw
