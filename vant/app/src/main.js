@@ -29,7 +29,7 @@ Vue.use(Form)
 Vue.use(DatePicker)
 Vue.use(VueGoogleMaps, {
   load: {
-    key: 'AIzaSyCqylmPYk41UO3LWcyun3fMxieV7hxn6TI',
+    key: 'AIzaSyB9PotTxmroyeAGU4Eim4m_0IYr14EYunU',
     // libraries: 'places', // This is required if you use the Autocomplete plugin
     region: 'VI',
     language: 'vi'
