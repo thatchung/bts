@@ -5,7 +5,7 @@ import { getToken } from '@/utils/token'
 
 const Instance = axios.create({
   method: 'get',
-  baseURL: process.env.NODE_ENV === 'development' ? 'http://210.211.121.138:1347/' : 'http://210.211.121.138:1347/',
+  baseURL: process.env.NODE_ENV === 'development' ? 'http://103.116.104.166:1347/' : 'http://103.116.104.166:1347/',
   headers: {
     'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
   },
