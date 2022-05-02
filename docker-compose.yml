@@ -2,7 +2,7 @@ version: '3.5'
 services:
   mysql:
     container_name: mysql_server
-    image: mysql
+    image: mysql:8.0
     command: mysqld --default-authentication-plugin=mysql_native_password --character-set-server=utf8mb4 --collation-server=utf8mb4_general_ci
     volumes:
       - ./mysqldata:/var/lib/mysql
@@ -16,4 +16,3 @@ services:
       MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
     network_mode: bridge
 
-version: '3.5'
