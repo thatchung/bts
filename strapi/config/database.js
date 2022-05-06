@@ -2,7 +2,7 @@ module.exports = ({ env }) => ({
   connection: {
     client: 'mysql',
     connection: {
-      host: '103.116.104.166',
+      host: '172.17.0.2',
       port: 3306,
       database: 'strapi',
       user: 'strapi',
