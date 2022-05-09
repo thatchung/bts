@@ -229,6 +229,9 @@ export default {
           this.confirmLoading = false
           return
         }
+        if (this.form.type) {
+          this.form.type = 'viewer'
+        }
         addUser({
           ...this.form,
           confirmed: true
