@@ -229,7 +229,7 @@ export default {
           this.confirmLoading = false
           return
         }
-        if (this.form.type) {
+        if (!this.form.type) {
           this.form.type = 'viewer'
         }
         addUser({
