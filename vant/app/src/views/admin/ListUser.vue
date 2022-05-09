@@ -49,7 +49,15 @@
           <a-input v-model="form.phone" placeholder="nhập số điện thoại" />
         </a-form-model-item>
         <a-form-model-item label="Vai trò">
-          <a-select style="width: 120px" @change="handleChangeType">
+          <!-- <a-select style="width: 120px" @change="handleChangeType">
+            <a-select-option value="admin">
+              Admin
+            </a-select-option>
+            <a-select-option value="viewer">
+              Viewer
+            </a-select-option>
+          </a-select> -->
+          <a-select :value="form.type" style="width: 120px" @change="handleChangeType">
             <a-select-option value="admin">
               Admin
             </a-select-option>
