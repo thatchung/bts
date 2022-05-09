@@ -218,7 +218,7 @@ export default {
         username: null,
         full_name: null,
         phone: null,
-        type: null
+        type: 'viewer'
       }
     },
     handleOk (e) {
