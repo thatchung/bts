@@ -1,10 +1,10 @@
 <template>
   <a-layout :class="{'layout-menu-fixed': configs.isFixedMenu}">
-    <LayoutAside :collapsed="collapsed" />
+    <LayoutAside :collapsed="$store.state.collapsed" @on-click="setNewCollapsed(!$store.state.collapsed)" />
     <a-layout :class="classes">
-      <LayoutHeader :collapsed="collapsed" @on-click="collapsed=!collapsed" @open-setting="isSetting=true" />
+      <LayoutHeader :collapsed="$store.state.collapsed" @on-click="setNewCollapsed(!$store.state.collapsed)" @open-setting="isSetting=true" />
       <tabs-nav v-if="configs.isMultiTab" />
-      <a-layout-content>
+      <a-layout-content style="position: relative;">
         <keep-alive :include="cacheList" :max="12">
           <router-view v-if="isReload" />
         </keep-alive>
@@ -27,7 +27,6 @@ export default {
   },
   data () {
     return {
-      collapsed: false,
       isReload: true,
       isSetting: false
     }
@@ -35,7 +34,7 @@ export default {
   computed: {
     classes () {
       return {
-        'is-fold': this.collapsed,
+        'is-fold': this.$store.state.collapsed,
         'layout-header-fixed': this.configs.isFixedHeader,
         'layout-multi-tab': this.configs.isMultiTab && this.configs.isFixedHeader
       }
@@ -58,7 +57,9 @@ export default {
     }
   },
   methods: {
-    // Refresh the current component
+    setNewCollapsed (data) {
+      this.$store.commit('setCollapsedInfo', data)
+    },
     reloading () {
       this.$progress.start()
       this.isReload = false

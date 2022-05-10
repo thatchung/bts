@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="filter-container">
+    <!-- <div class="filter-container">
       <div class="filter-item" style="width:150px;">
         <a-select
           style="width: 150px"
@@ -19,17 +19,12 @@
           </a-select-option>
         </a-select>
       </div>
-    </div>
-    <div class="statistic-panel">
-      <a-statistic title="Tổng trạm" :value="statistic.total_bts" />
-      <a-statistic title="Trạm đang hoạt động" :value="statistic.total_action" />
-      <a-statistic title="Trạm mất kết nói" :value="statistic.total_disconection" />
-    </div>
-    <div class="map-container">
+    </div> -->
+    <!-- <div class="map-container">
       <GmapMap
         :center="center"
         :zoom="12"
-        map-type-id="terrain"
+        map-type-id="satellite"
         style="margin-top: 25px;width: 100%; height: calc(100vh - 150px)"
       >
         <GmapMarker
@@ -47,17 +42,48 @@
           </gmap-info-window>
         </GmapMarker>
       </GmapMap>
+    </div> -->
+    <div class="map-popup">
+      <GmapMap
+        :center="center"
+        :zoom="12"
+        map-type-id="satellite"
+        style="width: 100%; height: 100%"
+      >
+        <GmapMarker
+          :key="index"
+          v-for="(m, index) in markers"
+          :position="m"
+          :clickable="true"
+          @click="center=m.position"
+          @mouseover="showByIndex = index"
+          @mouseout="showByIndex = null"
+        >
+          <gmap-info-window :opened="showByIndex === index" >
+            <div>
+              <div>Trạm : <b>{{ m.label }}</b></div>
+              <div>Nhân Viên : <b>{{ m.user }}</b></div>
+            </div>
+          </gmap-info-window>
+        </GmapMarker>
+      </GmapMap>
+      <div class="statistic-panel">
+        <a-statistic title="Tổng trạm" :value="statistic.total_bts" />
+        <a-statistic title="Trạm đang hoạt động" :value="statistic.total_action" />
+        <a-statistic title="Trạm mất kết nói" :value="statistic.total_disconection" />
+      </div>
     </div>
   </div>
 </template>
 <script>
 import { getBtsList } from '@/api/bts'
 import provinces from '@/api/province'
+// import MapPopup from './c_map'
 
 export default {
   name: 'Dashboard',
   // components: {
-  //   MglMap
+  //   MapPopup
   // },
   data () {
     return {
@@ -136,10 +162,10 @@ export default {
       })
     }
   },
-
   mounted () {
     this.loadData()
     this.list_province = provinces
+    this.$store.commit('setCollapsedInfo', true)
   }
 }
 </script>
@@ -149,6 +175,14 @@ export default {
   display: block;
   float: left;
   margin: 5px 0px;
+}
+.map-popup{
+  position: absolute;
+  top: -55px;
+  left: 0px;
+  z-index: 100;
+  width: 100%;
+  height: 100vh;
 }
 .filter-container{
   margin-bottom: 5px;
@@ -170,7 +204,10 @@ export default {
   float: right;
   box-shadow: 0 0px 10px 0 rgb(32 33 36 / 28%);
   padding: 0px 10px;
-  border-radius: 7px;
+  background-color: #ffffff5c;
+  position: absolute;
+  bottom: 0px;
+  left: 0px;
 }
 .ant-statistic{
   margin-right: 10px;

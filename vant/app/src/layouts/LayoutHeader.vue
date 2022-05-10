@@ -1,7 +1,6 @@
 <template>
   <a-layout-header>
     <div class="left">
-      <a-icon class="trigger" :type="collapsed ? 'menu-unfold' : 'menu-fold'" @click="handleClick" />
       <a-tooltip placement="bottom" @click="reloading()">
         <a-icon class="trigger cp" type="sync" />
       </a-tooltip>
@@ -20,17 +19,8 @@ export default {
     AvatarName
     // Fullscreen
   },
-  props: {
-    collapsed: {
-      type: Boolean,
-      default: false
-    }
-  },
   inject: ['reloading'],
   methods: {
-    handleClick () {
-      this.$emit('on-click')
-    },
     openSetting () {
       this.$emit('open-setting')
     }

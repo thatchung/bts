@@ -1,6 +1,7 @@
 <template>
   <a-layout-sider :theme="asideTheme" v-model="collapsed" :trigger="null" collapsible>
     <div class="layout-logo"></div>
+    <a-icon class="trigger" :type="collapsed ? 'menu-unfold' : 'menu-fold'" @click="handleClick" />
     <a-menu
       :theme="asideTheme"
       mode="inline"
@@ -69,6 +70,10 @@ export default {
     }
   },
   methods: {
+    handleClick () {
+      console.log('aaa')
+      this.$emit('on-click')
+    },
     isExternalLink (item) {
       return (item.meta && item.meta.links) ? `externalLink_${item.name}-${item.meta.links}` : item.name
     },
@@ -158,5 +163,9 @@ export default {
   align-items: center;
   justify-content: center;
   height: 55px;
+}
+.trigger{
+  color: #fff;
+  padding-left: 24px;
 }
 </style>

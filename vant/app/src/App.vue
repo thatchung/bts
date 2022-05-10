@@ -8,7 +8,7 @@
 
 <script>
 // import { i18nRender } from '@/locales'
-import viVN from 'ant-design-vue/lib/locale-provider/en_US'
+import viVN from 'ant-design-vue/lib/locale-provider/vi_VN.js'
 
 export default {
   data () {

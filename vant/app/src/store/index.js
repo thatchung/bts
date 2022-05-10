@@ -9,16 +9,24 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    userInfo: {}
+    userInfo: {},
+    collapsed: false
   },
   mutations: {
     setUserInfo (state, data) {
       state.userInfo = data || {}
+    },
+    setCollapsedInfo (state, data) {
+      state.collapsed = data || false
     }
   },
   getters: {
     getUserInfo: (state) => () => {
       return state.userInfo
+    },
+    getCollapsedInfo: (state) => () => {
+      console.log(state.collapsed)
+      return state.collapsed
     }
   },
   modules: {
