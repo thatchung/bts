@@ -61,8 +61,8 @@
         >
           <gmap-info-window :opened="showByIndex === index" >
             <div>
-              <div>Trạm : <b>{{ m.label }}</b></div>
-              <div>Nhân Viên : <b>{{ m.user }}</b></div>
+              <div><a-icon type="table" />: <b>{{ m.label }}</b></div>
+              <div><a-icon type="user" /> : <b>{{ m.user }}</b></div>
             </div>
           </gmap-info-window>
         </GmapMarker>

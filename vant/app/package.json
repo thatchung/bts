@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "@ant-design-vue/pro-layout": "^1.0.11",
+    "@ant-design/icons-vue": "^6.1.0",
     "@antv/data-set": "^0.10.2",
     "@goongmaps/goong-js": "^1.0.9",
     "ant-design-vue": "^1.7.6",
