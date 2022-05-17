@@ -166,7 +166,7 @@ export default {
     this.loadData()
     this.list_province = provinces
     this.$store.commit('setCollapsedInfo', true)
-  }
+  },
 }
 </script>
 <style lang='less' scoped>

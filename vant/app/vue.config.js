@@ -56,7 +56,7 @@ const vueConfig = {
 
   chainWebpack: config => {
     config.resolve.alias.set('@$', resolve('src'))
-
+    config.module.rules.delete('eslint')
     const svgRule = config.module.rule('svg')
     svgRule.uses.clear()
     svgRule
