@@ -4,10 +4,11 @@
   "info": {
     "singularName": "device-profile",
     "pluralName": "device-profiles",
-    "displayName": "device_profile"
+    "displayName": "device_profile",
+    "description": ""
   },
   "options": {
-    "draftAndPublish": true
+    "draftAndPublish": false
   },
   "pluginOptions": {},
   "attributes": {
@@ -28,6 +29,16 @@
         "power_meter_3p",
         "power_meter_1p"
       ]
+    },
+    "communication": {
+      "type": "enumeration",
+      "enum": [
+        "modbus_tcp",
+        "modbus_rtu"
+      ]
+    },
+    "regs": {
+      "type": "json"
     }
   }
 }

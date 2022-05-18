@@ -58,6 +58,7 @@
           @click="center=m.position"
           @mouseover="showByIndex = index"
           @mouseout="showByIndex = null"
+          :icon="markerOptions"
         >
           <gmap-info-window :opened="showByIndex === index" >
             <div>
@@ -102,6 +103,15 @@ export default {
         total_bts: 0,
         total_action: 0,
         total_disconection: 0
+      },
+      markerOptions: {
+        url: require('@/assets/image/tram.png'),
+        size: {
+          width: 30, height: 33
+        },
+        scaledSize: {
+          width: 30, height: 33
+        }
       },
       timeout: null
     }

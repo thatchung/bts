@@ -30,7 +30,7 @@
           <GmapMap
             :center="{ lat:bts.lat, lng:bts.lng }"
             :zoom="14"
-            map-type-id="terrain"
+            map-type-id="satellite"
             style="width: 100%; height: 250px"
           >
             <GmapMarker ref="myMarker" :position="google && new google.maps.LatLng(bts.lat, bts.lng)" />
@@ -94,7 +94,7 @@
         <a-form-model-item label="Serial">
           <a-input v-model="form.serial" placeholder="nhập serial" />
         </a-form-model-item>
-        <a-form-model-item label="Giao thức">
+        <!-- <a-form-model-item label="Giao thức">
           <a-select style="width: 200px" v-model="form.protocol">
             <a-select-option value="modbus_tcp">
               modbus_tcp
@@ -103,7 +103,7 @@
               modbus_rtu
             </a-select-option>
           </a-select>
-        </a-form-model-item>
+        </a-form-model-item> -->
       </a-form-model>
     </a-modal>
     <a-modal
@@ -139,7 +139,7 @@
         <a-form-model-item label="Serial">
           <a-input v-model="form.serial" placeholder="nhập serial" />
         </a-form-model-item>
-        <a-form-model-item label="Giao thức">
+        <!-- <a-form-model-item label="Giao thức">
           <a-select style="width: 200px" v-model="form.protocol">
             <a-select-option value="modbus_tcp">
               modbus_tcp
@@ -148,7 +148,7 @@
               modbus_rtu
             </a-select-option>
           </a-select>
-        </a-form-model-item>
+        </a-form-model-item> -->
       </a-form-model>
     </a-modal>
   </div>
@@ -166,12 +166,12 @@ const columns = [
     dataIndex: 'name',
     align: 'center'
   },
-  {
-    key: 'protocol',
-    title: 'Giao thức',
-    dataIndex: 'protocol',
-    align: 'center'
-  },
+  // {
+  //   key: 'protocol',
+  //   title: 'Giao thức',
+  //   dataIndex: 'protocol',
+  //   align: 'center'
+  // },
   {
     key: 'serial',
     title: 'Serial',
@@ -235,8 +235,8 @@ export default {
       profile: {},
       form: {
         name: null,
-        serial: null,
-        protocol: null
+        serial: null
+        // protocol: null
       }
     }
   },
@@ -310,8 +310,8 @@ export default {
       this.isAdd = true
       this.form = {
         name: null,
-        serial: null,
-        protocol: null
+        serial: null
+        // protocol: null
       }
       this.profile = {}
       this.list_profile = this.list_profile_origin
@@ -347,8 +347,8 @@ export default {
       this.form = {
         id: item.id,
         name: item.name,
-        serial: item.serial,
-        protocol: item.protocol
+        serial: item.serial
+        // protocol: item.protocol
       }
       this.profile = {
         model: item.model,

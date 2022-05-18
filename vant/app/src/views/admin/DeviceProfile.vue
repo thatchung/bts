@@ -28,35 +28,66 @@
       :confirm-loading="confirmLoading"
       ok-text="Thêm"
       cancel-text="Hủy"
+      width="1200px"
       @ok="handleOk"
       @cancel="handleCancel"
     >
       <a-form-model :layout="'vertical'" :model="form">
-        <a-form-model-item label="Tên">
-          <a-input v-model="form.name" placeholder="nhập tên" />
-        </a-form-model-item>
-        <a-form-model-item label="Model">
-          <a-input v-model="form.model" placeholder="nhập model" />
-        </a-form-model-item>
-        <a-form-model-item label="Hãng">
-          <a-input v-model="form.brand" placeholder="nhập hãng" />
-        </a-form-model-item>
-        <a-form-model-item label="Chủng loại">
-          <a-select style="width: 250px" @change="handleChangeType">
-            <a-select-option value="solar_inv">
-              solar_inv
-            </a-select-option>
-            <a-select-option value="controller">
-              controller
-            </a-select-option>
-            <a-select-option value="power_meter_3p">
-              power_meter_3p
-            </a-select-option>
-            <a-select-option value="power_meter_1p">
-              power_meter_1p
-            </a-select-option>
-          </a-select>
-        </a-form-model-item>
+        <a-row :gutter="24">
+          <a-col :span="12">
+            <a-form-model-item label="Tên">
+              <a-input v-model="form.name" placeholder="nhập tên" />
+            </a-form-model-item>
+          </a-col>
+          <a-col :span="12">
+            <a-form-model-item label="Model">
+              <a-input v-model="form.model" placeholder="nhập model" />
+            </a-form-model-item>
+          </a-col>
+          <a-col :span="8">
+            <a-form-model-item label="Hãng">
+              <a-input v-model="form.brand" placeholder="nhập hãng" />
+            </a-form-model-item>
+          </a-col>
+          <a-col :span="8">
+            <a-form-model-item label="Giao thức">
+              <a-select style="width: 100%" @change="handleChangeComunitication">
+                <a-select-option value="modbus_tcp">
+                  modbus_tcp
+                </a-select-option>
+                <a-select-option value="modbus_rtu">
+                  modbus_rtu
+                </a-select-option>
+              </a-select>
+            </a-form-model-item>
+          </a-col>
+          <a-col :span="8">
+            <a-form-model-item label="Chủng loại">
+              <a-select style="width: 100%" @change="handleChangeType">
+                <a-select-option value="solar_inv">
+                  solar_inv
+                </a-select-option>
+                <a-select-option value="controller">
+                  controller
+                </a-select-option>
+                <a-select-option value="power_meter_3p">
+                  power_meter_3p
+                </a-select-option>
+                <a-select-option value="power_meter_1p">
+                  power_meter_1p
+                </a-select-option>
+              </a-select>
+            </a-form-model-item>
+          </a-col>
+          <a-col :span="24">
+            <a-form-model-item label="Cấu hình">
+              <solarinv ref="ref_solar_inv" v-if="form.type === 'solar_inv'"></solarinv>
+              <controller ref="ref_controller" v-if="form.type === 'controller'"></controller>
+              <power1p ref="ref_1p" v-if="form.type === 'power_meter_1p'"></power1p>
+              <power3p ref="ref_3p" v-if="form.type === 'power_meter_3p'"></power3p>
+            </a-form-model-item>
+          </a-col>
+        </a-row>
       </a-form-model>
     </a-modal>
 
@@ -66,35 +97,66 @@
       :confirm-loading="confirmLoading"
       ok-text="Cập Nhật"
       cancel-text="Hủy"
+      width="1200px"
       @ok="handleUpdateOk"
       @cancel="handleUpdateCancel"
     >
       <a-form-model :layout="'vertical'" :model="form">
-        <a-form-model-item label="Tên">
-          <a-input v-model="form.name" placeholder="nhập tên" />
-        </a-form-model-item>
-        <a-form-model-item label="Model">
-          <a-input v-model="form.model" placeholder="nhập model" />
-        </a-form-model-item>
-        <a-form-model-item label="Hãng">
-          <a-input v-model="form.brand" placeholder="nhập hãng" />
-        </a-form-model-item>
-        <a-form-model-item label="Chủng loại" >
-          <a-select :value="form.type" style="width: 250px" @change="handleChangeType">
-            <a-select-option value="solar_inv">
-              solar_inv
-            </a-select-option>
-            <a-select-option value="controller">
-              controller
-            </a-select-option>
-            <a-select-option value="power_meter_3p">
-              power_meter_3p
-            </a-select-option>
-            <a-select-option value="power_meter_1p">
-              power_meter_1p
-            </a-select-option>
-          </a-select>
-        </a-form-model-item>
+        <a-row :gutter="24">
+          <a-col :span="12">
+            <a-form-model-item label="Tên">
+              <a-input v-model="form.name" placeholder="nhập tên" />
+            </a-form-model-item>
+          </a-col>
+          <a-col :span="12">
+            <a-form-model-item label="Model">
+              <a-input v-model="form.model" placeholder="nhập model" />
+            </a-form-model-item>
+          </a-col>
+          <a-col :span="8">
+            <a-form-model-item label="Hãng">
+              <a-input v-model="form.brand" placeholder="nhập hãng" />
+            </a-form-model-item>
+          </a-col>
+          <a-col :span="8">
+            <a-form-model-item label="Giao thức">
+              <a-select :value="form.communication" style="width: 100%" @change="handleChangeComunitication">
+                <a-select-option value="modbus_tcp">
+                  modbus_tcp
+                </a-select-option>
+                <a-select-option value="modbus_rtu">
+                  modbus_rtu
+                </a-select-option>
+              </a-select>
+            </a-form-model-item>
+          </a-col>
+          <a-col :span="8">
+            <a-form-model-item label="Chủng loại">
+              <a-select :value="form.type" style="width: 100%" @change="handleChangeType">
+                <a-select-option value="solar_inv">
+                  solar_inv
+                </a-select-option>
+                <a-select-option value="controller">
+                  controller
+                </a-select-option>
+                <a-select-option value="power_meter_3p">
+                  power_meter_3p
+                </a-select-option>
+                <a-select-option value="power_meter_1p">
+                  power_meter_1p
+                </a-select-option>
+              </a-select>
+            </a-form-model-item>
+          </a-col>
+          <a-col :span="24">
+            <a-form-model-item label="Cấu hình">
+              <solarinv ref="ref_solar_inv" :data="form.regs" v-if="form.type === 'solar_inv'"></solarinv>
+              <controller ref="ref_controller" :data="form.regs" v-if="form.type === 'controller'"></controller>
+              <power1p ref="ref_1p" :data="form.regs" v-if="form.type === 'power_meter_1p'"></power1p>
+              <power3p ref="ref_3p" :data="form.regs" v-if="form.type === 'power_meter_3p'"></power3p>
+            </a-form-model-item>
+          </a-col>
+        </a-row>
       </a-form-model>
     </a-modal>
   </div>
@@ -102,6 +164,11 @@
 <script>
 import { getDProfilesList, addDProfile, updateDProfile, deleteDProfile } from '@/api/device-profiles'
 import page from '@/mixins/page'
+import solarinv from '@/components/solar_inv.vue'
+import controller from '@/components/controller.vue'
+import power1p from '@/components/power_meter_1p.vue'
+import power3p from '@/components/power_meter_3p.vue'
+
 const columns = [
   {
     key: 'id',
@@ -131,7 +198,12 @@ const columns = [
   {
     key: 'type',
     dataIndex: 'type',
-    title: 'Vai Trò'
+    title: 'Loại'
+  },
+  {
+    key: 'communication',
+    dataIndex: 'communication',
+    title: 'Giao thức'
   },
   {
     title: 'Action',
@@ -143,9 +215,13 @@ const columns = [
 export default {
   name: 'DeviceProfile',
   mixins: [page],
-  // components: {
-  //   Pagination: () => import('@@/pagination')
-  // },
+  components: {
+    // Pagination: () => import('@@/pagination')
+    solarinv,
+    controller,
+    power1p,
+    power3p
+  },
   data () {
     return {
       columns: Object.freeze(columns),
@@ -162,7 +238,9 @@ export default {
         name: null,
         model: null,
         brand: null,
-        type: null
+        type: null,
+        communication: null,
+        regs: []
       }
     }
   },
@@ -170,6 +248,9 @@ export default {
     edit (query) {},
     handleChangeType (selectedItems) {
       this.form.type = selectedItems
+    },
+    handleChangeComunitication (selectedItems) {
+      this.form.communication = selectedItems
     },
     onSearch () {
       const params = {}
@@ -203,6 +284,16 @@ export default {
     handleOk (e) {
       this.confirmLoading = true
       if (this.form.name && this.form.type) {
+        this.form.regs = []
+        if (this.form.type === 'solar_inv') {
+          this.form.regs = this.$refs.ref_solar_inv.getData()
+        } else if (this.form.type === 'controller') {
+          this.form.regs = this.$refs.ref_controller.getData()
+        } else if (this.form.type === 'power_meter_1p') {
+          this.form.regs = this.$refs.ref_1p.getData()
+        } else if (this.form.type === 'power_meter_3p') {
+          this.form.regs = this.$refs.ref_3p.getData()
+        }
         addDProfile({ data: this.form }).then(res => {
           if (!res) {
             this.$message.warning('Thêm mới không thành công')
@@ -221,11 +312,20 @@ export default {
     openUpdate (item) {
       this.isUpdate = true
       this.form = item
-      console.log(this.form)
     },
     handleUpdateOk (e) {
       this.confirmLoading = true
       if (this.form.id && this.form.name && this.form.type) {
+        this.form.regs = []
+        if (this.form.type === 'solar_inv') {
+          this.form.regs = this.$refs.ref_solar_inv.getData()
+        } else if (this.form.type === 'controller') {
+          this.form.regs = this.$refs.ref_controller.getData()
+        } else if (this.form.type === 'power_meter_1p') {
+          this.form.regs = this.$refs.ref_1p.getData()
+        } else if (this.form.type === 'power_meter_3p') {
+          this.form.regs = this.$refs.ref_3p.getData()
+        }
         updateDProfile({ data: this.form, id: this.form.id }).then(res => {
           if (!res) {
             this.$message.warning('Cập nhật không thành công')

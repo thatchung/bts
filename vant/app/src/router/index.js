@@ -111,7 +111,7 @@ const router = new VueRouter({
           path: '/device-profile',
           name: 'deviceprofile',
           meta: {
-            title: 'Quản lý thiết bị',
+            title: 'Quản lý profile thiết bị',
             icon: 'codepen',
             keepAlive: true
           },

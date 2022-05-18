@@ -8,7 +8,7 @@
     "description": ""
   },
   "options": {
-    "draftAndPublish": true
+    "draftAndPublish": false
   },
   "pluginOptions": {},
   "attributes": {
@@ -29,13 +29,6 @@
     },
     "name": {
       "type": "string"
-    },
-    "protocol": {
-      "type": "enumeration",
-      "enum": [
-        "modbus_tcp",
-        "modbus_rtu"
-      ]
     },
     "serial": {
       "type": "string"
