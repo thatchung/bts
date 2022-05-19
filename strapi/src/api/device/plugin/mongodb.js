@@ -1,5 +1,5 @@
 const { MongoClient } = require('mongodb')
-const uri = "mongodb://develop:456468@start.saentek.com:27017/admin"
+const uri = "mongodb://develop:456468@103.116.104.166:27017/admin"
 const client = new MongoClient(uri)
 
 async function callAction (action) {
