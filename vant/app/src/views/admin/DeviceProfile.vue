@@ -52,11 +52,8 @@
           <a-col :span="8">
             <a-form-model-item label="Giao thức">
               <a-select style="width: 100%" @change="handleChangeComunitication">
-                <a-select-option value="modbus_tcp">
-                  modbus_tcp
-                </a-select-option>
-                <a-select-option value="modbus_rtu">
-                  modbus_rtu
+                <a-select-option v-for="(item, index) in listcomuni" :key="index" :value="item">
+                  {{item}}
                 </a-select-option>
               </a-select>
             </a-form-model-item>
@@ -64,17 +61,8 @@
           <a-col :span="8">
             <a-form-model-item label="Chủng loại">
               <a-select style="width: 100%" @change="handleChangeType">
-                <a-select-option value="solar_inv">
-                  solar_inv
-                </a-select-option>
-                <a-select-option value="controller">
-                  controller
-                </a-select-option>
-                <a-select-option value="power_meter_3p">
-                  power_meter_3p
-                </a-select-option>
-                <a-select-option value="power_meter_1p">
-                  power_meter_1p
+                <a-select-option v-for="(item, index) in listtype" :key="index" :value="item">
+                  {{item}}
                 </a-select-option>
               </a-select>
             </a-form-model-item>
@@ -85,6 +73,10 @@
               <controller ref="ref_controller" v-if="form.type === 'controller'"></controller>
               <power1p ref="ref_1p" v-if="form.type === 'power_meter_1p'"></power1p>
               <power3p ref="ref_3p" v-if="form.type === 'power_meter_3p'"></power3p>
+              <type ref="ref_type" v-if="!(form.type === 'power_meter_3p'
+                || form.type === 'solar_inv'
+                || form.type === 'controller'
+                || form.type === 'power_meter_1p')" :type="form.type"></type>
             </a-form-model-item>
           </a-col>
         </a-row>
@@ -121,11 +113,8 @@
           <a-col :span="8">
             <a-form-model-item label="Giao thức">
               <a-select :value="form.communication" style="width: 100%" @change="handleChangeComunitication">
-                <a-select-option value="modbus_tcp">
-                  modbus_tcp
-                </a-select-option>
-                <a-select-option value="modbus_rtu">
-                  modbus_rtu
+                <a-select-option v-for="(item, index) in listtype" :key="index" :value="item">
+                  {{item}}
                 </a-select-option>
               </a-select>
             </a-form-model-item>
@@ -133,17 +122,8 @@
           <a-col :span="8">
             <a-form-model-item label="Chủng loại">
               <a-select :value="form.type" style="width: 100%" @change="handleChangeType">
-                <a-select-option value="solar_inv">
-                  solar_inv
-                </a-select-option>
-                <a-select-option value="controller">
-                  controller
-                </a-select-option>
-                <a-select-option value="power_meter_3p">
-                  power_meter_3p
-                </a-select-option>
-                <a-select-option value="power_meter_1p">
-                  power_meter_1p
+                <a-select-option v-for="(item, index) in listcomuni" :key="index" :value="item">
+                  {{item}}
                 </a-select-option>
               </a-select>
             </a-form-model-item>
@@ -154,6 +134,10 @@
               <controller ref="ref_controller" :data="form.regs" v-if="form.type === 'controller'"></controller>
               <power1p ref="ref_1p" :data="form.regs" v-if="form.type === 'power_meter_1p'"></power1p>
               <power3p ref="ref_3p" :data="form.regs" v-if="form.type === 'power_meter_3p'"></power3p>
+              <type ref="ref_type" :data="form.regs" v-if="!(form.type === 'power_meter_3p'
+                || form.type === 'solar_inv'
+                || form.type === 'controller'
+                || form.type === 'power_meter_1p')" :type="form.type"></type>
             </a-form-model-item>
           </a-col>
         </a-row>
@@ -168,6 +152,7 @@ import solarinv from '@/components/solar_inv.vue'
 import controller from '@/components/controller.vue'
 import power1p from '@/components/power_meter_1p.vue'
 import power3p from '@/components/power_meter_3p.vue'
+import type from '@/components/type.vue'
 
 const columns = [
   {
@@ -220,7 +205,8 @@ export default {
     solarinv,
     controller,
     power1p,
-    power3p
+    power3p,
+    type
   },
   data () {
     return {
@@ -241,7 +227,9 @@ export default {
         type: null,
         communication: null,
         regs: []
-      }
+      },
+      listtype: ['solar_inv', 'controller', 'power_meter_3p', 'power_meter_1p', 'dc_power', 'ac_power', 'ats', 'sensors', 'generator', 'lithium', 'order'],
+      listcomuni: ['modbus_tcp', 'modbus_rtu', 'snmp', 'order']
     }
   },
   methods: {
@@ -255,7 +243,7 @@ export default {
     onSearch () {
       const params = {}
       if (this.filter.name) {
-        params['filters[$or][0][name][$contains]'] = this.filter.name
+       params['filters[$or][0][name][$contains]'] = this.filter.name
       }
       this.loadData(params)
     },
@@ -293,6 +281,8 @@ export default {
           this.form.regs = this.$refs.ref_1p.getData()
         } else if (this.form.type === 'power_meter_3p') {
           this.form.regs = this.$refs.ref_3p.getData()
+        } else {
+          this.form.regs = this.$refs.ref_type.getData()
         }
         addDProfile({ data: this.form }).then(res => {
           if (!res) {
@@ -325,6 +315,8 @@ export default {
           this.form.regs = this.$refs.ref_1p.getData()
         } else if (this.form.type === 'power_meter_3p') {
           this.form.regs = this.$refs.ref_3p.getData()
+        } else {
+          this.form.regs = this.$refs.ref_type.getData()
         }
         updateDProfile({ data: this.form, id: this.form.id }).then(res => {
           if (!res) {
