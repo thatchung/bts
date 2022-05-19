@@ -27,14 +27,23 @@
         "solar_inv",
         "controller",
         "power_meter_3p",
-        "power_meter_1p"
+        "power_meter_1p",
+        "dc_power",
+        "ac_power",
+        "ats",
+        "sensors",
+        "generator",
+        "lithium",
+        "order"
       ]
     },
     "communication": {
       "type": "enumeration",
       "enum": [
         "modbus_tcp",
-        "modbus_rtu"
+        "modbus_rtu",
+        "snmp",
+        "order"
       ]
     },
     "regs": {
