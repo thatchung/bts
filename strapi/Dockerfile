@@ -5,4 +5,4 @@ RUN pwd && ls
 RUN echo "====== BUILD APPS ======"
 RUN yarn
 RUN yarn build
-CMD [ "yarn", "develop" ]
+CMD [ "yarn", "start" ]
